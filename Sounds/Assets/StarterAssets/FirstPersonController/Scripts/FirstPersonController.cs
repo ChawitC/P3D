@@ -68,6 +68,7 @@ namespace StarterAssets
 		//*
 		[SerializeField] private AudioClip[] jumpSounds;
 		[SerializeField] private AudioClip[] landSounds;
+		private bool jumped = false; //boolean to check if jump is triggered and prevent from triggering consecutively 
 		//*/
 		[Tooltip("Effects the gap between footstep sounds. Smaller number = smaller gap")]
 		[Min(1.0f)] [SerializeField] private float stepRate = 1.0f;
@@ -210,6 +211,7 @@ namespace StarterAssets
 			{
 				// reset the fall timeout timer
 				_fallTimeoutDelta = FallTimeout;
+				
 
 				// stop our velocity dropping infinitely when grounded
 				if (_verticalVelocity < 0.0f)
@@ -223,14 +225,28 @@ namespace StarterAssets
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 					//
+					if (!jumped) //if jump has not been triggered
+					{
 					PlayJumpAudio();
+					jumped = true;
+					Debug.Log("jumped set to true");
+					}
+				}
+				else if (jumped && _jumpTimeoutDelta < 0.0f) //else if jump is triggered once and the player is now on ground
+				{
+					PlayLandAudio();
+					Debug.Log("jumped set to false");
+					jumped = false;
 				}
 
+				//Debug.Log(_jumpTimeoutDelta + " " + jumped);
+				
 				// jump timeout
 				if (_jumpTimeoutDelta >= 0.0f)
 				{
 					_jumpTimeoutDelta -= Time.deltaTime;
 				}
+				
 			}
 			else
 			{
@@ -302,7 +318,6 @@ namespace StarterAssets
 		{	
 			audioSource.clip = jumpSounds[0];
 			audioSource.PlayOneShot(audioSource.clip);
-			 
 		}
 		
 		private void PlayLandAudio()
