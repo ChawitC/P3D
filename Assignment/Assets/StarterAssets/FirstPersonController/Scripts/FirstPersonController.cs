@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
+
+
 namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
@@ -23,7 +25,8 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
-
+		
+		
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
@@ -56,6 +59,24 @@ namespace StarterAssets
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
+		
+		// (1)
+		// Exposed audio variables
+		[Header("Audio")]
+		[Tooltip("An array of footstep sounds. One gets randonly selected to play")]
+		[SerializeField] private AudioClip[] footstepSounds;  
+		//*
+		[SerializeField] private AudioClip[] jumpSounds;
+		[SerializeField] private AudioClip[] landSounds;
+		private bool jumped = false; //boolean to check if jump is triggered and prevent from triggering consecutively 
+		//*/
+		[Tooltip("Effects the gap between footstep sounds. Smaller number = smaller gap")]
+		[Min(1.0f)] [SerializeField] private float stepRate = 1.0f;
+
+		// Private audio variables
+		private float nextStep = 0.0f;
+		private AudioSource audioSource;
+		// (1) ends
 
 		// player
 		private float _speed;
@@ -90,6 +111,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			// (2)
+			audioSource = GetComponent<AudioSource>();
 		}
 
 		private void Update()
@@ -132,6 +155,7 @@ namespace StarterAssets
 
 		private void Move()
 		{
+			
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -175,7 +199,11 @@ namespace StarterAssets
 
 			// move the player
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			// (3)
+			PlayFootStepAudio();
+				
 		}
+		
 
 		private void JumpAndGravity()
 		{
@@ -183,6 +211,7 @@ namespace StarterAssets
 			{
 				// reset the fall timeout timer
 				_fallTimeoutDelta = FallTimeout;
+				
 
 				// stop our velocity dropping infinitely when grounded
 				if (_verticalVelocity < 0.0f)
@@ -195,13 +224,29 @@ namespace StarterAssets
 				{
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+					//
+					if (!jumped) //if jump has not been triggered
+					{
+					PlayJumpAudio();
+					jumped = true;
+					//Debug.Log("jumped set to true");
+					}
+				}
+				else if (jumped && _jumpTimeoutDelta < 0.0f) //else if jump is triggered once and the player is now on ground
+				{
+					PlayLandAudio();
+					//Debug.Log("jumped set to false");
+					jumped = false;
 				}
 
+				//Debug.Log(_jumpTimeoutDelta + " " + jumped);
+				
 				// jump timeout
 				if (_jumpTimeoutDelta >= 0.0f)
 				{
 					_jumpTimeoutDelta -= Time.deltaTime;
 				}
+				
 			}
 			else
 			{
@@ -243,5 +288,44 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
+		
+		// (4)
+		private void PlayFootStepAudio()
+		{	
+			// Debug.Log("Next " + nextStep);
+			if (Grounded && _speed > 0.0f && Time.time > nextStep)
+			{
+				// Debug.Log("Time " + Time.time);
+				float offset = _speed;
+				if ( _speed >= stepRate ) 
+				{
+					offset = (stepRate / _speed);
+				} 
+				nextStep = Time.time + offset;
+				// pick & play a random footstep sound from the array,
+				// excluding sound at index 0
+				int n = Random.Range(1, footstepSounds.Length);
+				audioSource.clip = footstepSounds[n];
+				audioSource.PlayOneShot(audioSource.clip);
+				// move picked sound to index 0 so it's not picked next time
+				footstepSounds[n] = footstepSounds[0];
+				footstepSounds[0] = audioSource.clip;
+			}    
+		}
+		
+		//* my code
+		private void PlayJumpAudio()
+		{	
+			audioSource.clip = jumpSounds[0];
+			audioSource.PlayOneShot(audioSource.clip);
+		}
+		
+		private void PlayLandAudio()
+		{	
+			audioSource.clip = landSounds[0];
+			audioSource.PlayOneShot(audioSource.clip);
+			 
+		}
+		//*/
 	}
 }
