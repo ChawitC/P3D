@@ -22,7 +22,7 @@ public class doorsMotion : MonoBehaviour
     private bool inTrigger = false;
 	private bool doorShouldBeOpened = false; //represent if door has been opened
 	private bool doorNowClosed = true; // represent if door is current closed
-	private string initText = "Init";
+	private string initText = " ";
 	private AudioSource audioSource;
 	private float timer = 0;
 
@@ -47,7 +47,7 @@ public class doorsMotion : MonoBehaviour
         }
 		
 		if (inTrigger) {contextText.text = "Press E to open the Doors";} // + timer.ToString("#.00") +" "+ doorShouldBeOpened +" "+ doorNowClosed;}
-		else {contextText.text = " ";} // have to remove this later because there could be conflict with other part of codes, but for now acts as overwrite
+		//else {contextText.text = " ";} // have to remove this later because there could be conflict with other part of codes, but for now acts as overwrite
 		//"DEBUG: Not in Trigger Zone " + timer.ToString("#.00") +" "+ doorShouldBeOpened  +" "+ doorNowClosed;}
 		
 		if(timer > 0.0f) {timer -= Time.deltaTime;} //countdown time by substracting current time
@@ -98,6 +98,7 @@ public class doorsMotion : MonoBehaviour
 			inTrigger = false;
 			timer += timerSet; // Timer is added by seconds
 			doorShouldBeOpened = false; //after the leaving trigger, the door should NOT be opened, timer starts
+			contextText.text = " "; //reset contextual text
         }
     }
 	
