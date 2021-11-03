@@ -38,7 +38,8 @@ public class doorsMotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if((Input.GetKeyDown(KeyCode.E)) && inTrigger )
+		if((Input.GetKeyDown(KeyCode.E)) && inTrigger && !doorShouldBeOpened) 
+			// last part is to ensure that the condition isn't triggered twice, breaking the code
         {
             animator.SetTrigger(openTrigger);
 			if (!doorShouldBeOpened) {PlayOpenAudio(); doorNowClosed = false;} // Only open door once
