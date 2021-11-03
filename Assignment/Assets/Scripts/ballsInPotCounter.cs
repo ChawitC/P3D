@@ -8,8 +8,15 @@ public class ballsInPotCounter : MonoBehaviour
 	int objects = 0;
 	[SerializeField] private string ballTag;
 	[SerializeField] private Text ballcountText;
+	//[SerializeField] private AudioClip[] fireSounds;
+	AudioSource audioSource;
 	
     // Update is called once per frame
+	void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+	
     void Update()
     {
         Debug.Log("Balls in pot: " + objects);
@@ -20,6 +27,7 @@ public class ballsInPotCounter : MonoBehaviour
 	{
 		if(other.tag == ballTag)
 		{
+		PlayFireAudio();
 		objects++;
 		}
 	}
@@ -31,5 +39,10 @@ public class ballsInPotCounter : MonoBehaviour
 		{
 		objects--;
 		}
+	}
+	private void PlayFireAudio()
+	{	
+			//audioSource.clip = fireSounds[0];
+			audioSource.PlayOneShot(audioSource.clip);
 	}
 }
