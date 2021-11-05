@@ -21,7 +21,8 @@ public class spawnObjects : MonoBehaviour
     private int numObjects;
 	private float timer; //count down timer to delay spawn
 	private bool inTrigger = false;
-	private bool zoneInit;
+	private bool zoneInit; //Frankly I don't remember what this is even for
+	private int textStage;
 
     // Start is called before the first frame update
     void Start()
@@ -30,21 +31,25 @@ public class spawnObjects : MonoBehaviour
         mObjects = new List<GameObject>();   
 		//audioSource = GetComponent<AudioSource>();	
 		zoneInit = false;
+		textStage = 0;
+		/* 
+		0 = first zone entry
+		1 = E has been pressed (ball spawned)
+		2 = F has been pressed (ball picked up)
+		*/
     }
 
     // Update is called once per frame
     void Update()
     {
 		
-			
-        
-
 		if((Input.GetKeyDown(KeyCode.E)) && inTrigger )
         {
             if (numObjects < maxObjects)
 			{
 				SpawnObject(numObjects);
 				numObjects++;
+				if (textStage == 0) {textStage++;} //change from first stage about E to second stage about F
 			}
         }
 		
@@ -52,10 +57,20 @@ public class spawnObjects : MonoBehaviour
 		{	
 			contextText.text = "Maximum number of balls reached";
 		}
-		if (inTrigger && !zoneInit) 
+		else if (inTrigger && !zoneInit) 
 		{
-			contextText.text = "Press E to spawn a ball\nPress F to grab the ball(s) close to you and hold them";
-			zoneInit = true;
+			if (textStage == 0) {contextText.text = "Press E to spawn a ball";}
+			if (textStage == 1) {contextText.text = "Press F to grab the ball(s) close to you and hold them";}
+			if (Input.GetKeyDown(KeyCode.F))
+			{
+				if (textStage <= 1) {textStage=2;} //if F is pressed regardless of E had been pressed when entering the zone or not, progress to last stage
+				//This is to consider the case where balls has been left on the mantle
+			}
+			if(textStage == 2) 
+			{
+				contextText.text = "Left click to throw the ball(s) forward\nRight click to drop the ball(s) straight down";
+			}
+			//zoneInit = true;
 		} 
 
 		/*if (numObjects < maxObjects)
@@ -116,6 +131,7 @@ public class spawnObjects : MonoBehaviour
         {
 			inTrigger = false;
 			zoneInit = false;
+			textStage = 0; //Text Stage gets reset
 			contextText.text = " "; //reset contextual text
         }
     }
