@@ -54,7 +54,7 @@ public class spawnObjects : MonoBehaviour
 		}
 		if (inTrigger && !zoneInit) 
 		{
-			contextText.text = "Press E to spawn balls";
+			contextText.text = "Press E to spawn a ball\nPress F to grab the ball(s) close to you and hold them";
 			zoneInit = true;
 		} 
 

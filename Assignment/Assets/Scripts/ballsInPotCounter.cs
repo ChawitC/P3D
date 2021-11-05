@@ -19,7 +19,7 @@ public class ballsInPotCounter : MonoBehaviour
 	
     void Update()
     {
-        Debug.Log("Balls in pot: " + objects);
+        //Debug.Log("Balls in pot: " + objects);
 		ballcountText.text = objects.ToString("#");
     }
 	
