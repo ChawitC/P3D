@@ -51,6 +51,7 @@ public class spawnObjects : MonoBehaviour
 				numObjects++;
 				if (textStage == 0) {textStage++;} //change from first stage about E to second stage about F
 			}
+			objectivesUpdater.obj2 = true; //Updating objective, since player has already spawned the object
         }
 		
 		if (numObjects >= maxObjects && inTrigger) //written as seprate condition otherwise only checked if key is pressed

@@ -29,6 +29,7 @@ public class ballsInPotCounter : MonoBehaviour
 		{
 		PlayFireAudio();
 		objects++;
+		objectivesUpdater.obj3 = true; //Updating objective, since player has dropped the ball into the pot
 		}
 	}
 
