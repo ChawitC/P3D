@@ -14,6 +14,7 @@ public class doorsMotion : MonoBehaviour
 	[Tooltip("An array of footstep sounds. One gets randonly selected to play")]
 	[SerializeField] private AudioClip[] doorOpenSounds;  
 	[SerializeField] private AudioClip[] doorCloseSounds; 
+	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
 	
 	[Header("Variables")]
 	[SerializeField] private float timerSet; //count down timer to delay animation
@@ -44,7 +45,12 @@ public class doorsMotion : MonoBehaviour
             animator.SetTrigger(openTrigger);
 			if (!doorShouldBeOpened) {PlayOpenAudio(); doorNowClosed = false;} // Only open door once
 			doorShouldBeOpened = true; // if door is open you can't open again
-			objectivesUpdater.obj1 = true; //Updating objective, since player has already opened the door
+			
+			objective.Obj1done = true;
+			//myObject.GetComponent.<objectivesUpdater>.obj1done();
+			//ScriptName sn = GameObject.FindObjectOfType(typeof(objectivesUpdater)) as objectivesUpdater;
+			//sn.obj1done();
+			//objectivesUpdater.obj1 = true; //Updating objective, since player has already opened the door
 			
         }
 		

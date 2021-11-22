@@ -6,16 +6,17 @@ using UnityEngine.UI;
 public class objectivesUpdater : MonoBehaviour
 {
 	[SerializeField] private Text objectiveText;
-	public static bool obj1 = false; //checking if player has gone through the door
-	public static bool obj2 = false; //checking if player has spawned a ball
-	public static bool obj3 = false; //checking if player player has dropped a ball into the pot
-	public static bool obj4 = false; //checking if player has touched the radio
+
+
+	private bool obj1 = false; //checking if player has gone through the door
+	private bool obj2 = false; //checking if player has spawned a ball
+	private bool obj3 = false; //checking if player player has dropped a ball into the pot
+	private bool obj4 = false; //checking if player has touched the radio
 	
     // Start is called before the first frame update
     void Start()
     {
         // maybe ill need start later
-		//objectiveText.text = "- Objectives -\n [ ] Go through sliding doors]\n [ ] Ask for a coal ball from the reception\n [ ] Play a music on the radio"; 
     }
 
     // Update is called once per frame
@@ -35,8 +36,26 @@ public class objectivesUpdater : MonoBehaviour
 		if (!obj4) {objectiveText.text = objectiveText.text + "[   ] Play a music on the radio\n";} 
 		else {objectiveText.text = objectiveText.text + "[✓] Play a music on the radio\n";}
 		
-	
-	//\n [ ] Ask for a coal ball from the reception\n [ ] Play a music on the radio";
-		
     }
+	
+	public bool Obj1done { 
+		get { return obj1; }
+		set { obj1 = value; }
+	}
+	
+	public bool Obj2done { 
+		get { return obj2; }
+		set { obj2 = value; }
+	}
+	
+	public bool Obj3done { 
+		get { return obj3; }
+		set { obj3 = value; }
+	}
+	
+	public bool Obj4done { 
+		get { return obj4; }
+		set { obj4 = value; }
+	}
+	
 }

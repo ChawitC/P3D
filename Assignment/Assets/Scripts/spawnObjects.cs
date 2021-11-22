@@ -10,6 +10,7 @@ public class spawnObjects : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int maxObjects;
     [SerializeField] private Text contextText;
+	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
     
 	//[Header("Audio")]
 	//[Tooltip("An array of footstep sounds. One gets randonly selected to play")]
@@ -51,7 +52,8 @@ public class spawnObjects : MonoBehaviour
 				numObjects++;
 				if (textStage == 0) {textStage++;} //change from first stage about E to second stage about F
 			}
-			objectivesUpdater.obj2 = true; //Updating objective, since player has already spawned the object
+			//objectivesUpdater.obj2 = true; //Updating objective, since player has already spawned the object
+			objective.Obj2done = true;
         }
 		
 		if (numObjects >= maxObjects && inTrigger) //written as seprate condition otherwise only checked if key is pressed

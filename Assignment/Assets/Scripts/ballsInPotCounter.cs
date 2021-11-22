@@ -8,6 +8,7 @@ public class ballsInPotCounter : MonoBehaviour
 	int objects = 0;
 	[SerializeField] private string ballTag;
 	[SerializeField] private Text ballcountText;
+	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
 	//[SerializeField] private AudioClip[] fireSounds;
 	AudioSource audioSource;
 	
@@ -29,7 +30,8 @@ public class ballsInPotCounter : MonoBehaviour
 		{
 		PlayFireAudio();
 		objects++;
-		objectivesUpdater.obj3 = true; //Updating objective, since player has dropped the ball into the pot
+		//objectivesUpdater.obj3 = true; //Updating objective, since player has dropped the ball into the pot
+		objective.Obj3done = true;
 		}
 	}
 
