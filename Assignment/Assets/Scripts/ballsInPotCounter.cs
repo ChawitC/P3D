@@ -9,6 +9,7 @@ public class ballsInPotCounter : MonoBehaviour
 	[SerializeField] private string ballTag;
 	[SerializeField] private Text ballcountText;
 	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
+	[SerializeField] private Light potLight;
 	//[SerializeField] private AudioClip[] fireSounds;
 	AudioSource audioSource;
 	
@@ -21,6 +22,7 @@ public class ballsInPotCounter : MonoBehaviour
     void Update()
     {
         //Debug.Log("Balls in pot: " + objects);
+		potLight.intensity = 5000000f + (objects*3000000f);
 		ballcountText.text = objects.ToString("#");
     }
 	
