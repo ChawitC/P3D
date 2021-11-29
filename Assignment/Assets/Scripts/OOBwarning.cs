@@ -10,7 +10,6 @@ public class OOBwarning : MonoBehaviour
 	
 	private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("In here");
         if(other.tag == playerTag)
         {
             contextText.text = "You can't go that way!"; //reset contextual text
@@ -19,7 +18,6 @@ public class OOBwarning : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //Debug.Log("Exiting here");
         if (other.tag == playerTag)
         {
 			contextText.text = " "; //reset contextual text

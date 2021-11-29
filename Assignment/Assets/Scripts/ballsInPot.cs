@@ -11,9 +11,6 @@ public class ballsInPot : MonoBehaviour
 	[SerializeField] private Text ballcountText;
 	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
 	[SerializeField] private Light potLight;
-	//[SerializeField] private float smokeRate;
-	//[SerializeField] private float spawnRate;
-	//[SerializeField] private AudioClip[] fireSounds;
 	AudioSource audioSource;
 	VisualEffect visualEffect;
 	private float smokeRateCalc;
@@ -28,8 +25,6 @@ public class ballsInPot : MonoBehaviour
 	
     void Update()
     {
-        //Debug.Log("Balls in pot: " + objects);
-		
 		potLight.intensity = 5000000f + (objects*3000000f); //increase intensity based on number of balls in the pot
 		smokeRateCalc = 1f + (objects*.2f); // Calculate rate of smoke effect spawning based on number of balls in the pot
 		splinterRateCalc = 10f + (objects*20f); // Calculate rate of splinter effect spawning based on number of balls in the pot
@@ -44,8 +39,7 @@ public class ballsInPot : MonoBehaviour
 		{
 		PlayFireAudio();
 		objects++;
-		//objectivesUpdater.obj3 = true; //Updating objective, since player has dropped the ball into the pot
-		objective.Obj3done = true;
+		objective.Obj3done = true; //Updating objective, since player has dropped the ball into the pot
 		}
 	}
 
@@ -57,9 +51,9 @@ public class ballsInPot : MonoBehaviour
 		objects--;
 		}
 	}
+	
 	private void PlayFireAudio()
 	{	
-			//audioSource.clip = fireSounds[0];
 			audioSource.PlayOneShot(audioSource.clip);
 	}
 }

@@ -35,7 +35,6 @@ public class doorsMotion : MonoBehaviour
 		contextText.text = initText;
     }
 	
-	// Note to self : if the flower hiberates on start up that's because that's according to the animation flow, not code here
     // Update is called once per frame
     void Update()
     {
@@ -46,17 +45,11 @@ public class doorsMotion : MonoBehaviour
 			if (!doorShouldBeOpened) {PlayOpenAudio(); doorNowClosed = false;} // Only open door once
 			doorShouldBeOpened = true; // if door is open you can't open again
 			
-			objective.Obj1done = true;
-			//myObject.GetComponent.<objectivesUpdater>.obj1done();
-			//ScriptName sn = GameObject.FindObjectOfType(typeof(objectivesUpdater)) as objectivesUpdater;
-			//sn.obj1done();
-			//objectivesUpdater.obj1 = true; //Updating objective, since player has already opened the door
+			objective.Obj1done = true; //Updating objective, since player has already opened the door
 			
         }
 		
-		if (inTrigger) {contextText.text = "Press E to open the Doors";} // + timer.ToString("#.00") +" "+ doorShouldBeOpened +" "+ doorNowClosed;}
-		//else {contextText.text = " ";} // have to remove this later because there could be conflict with other part of codes, but for now acts as overwrite
-		//"DEBUG: Not in Trigger Zone " + timer.ToString("#.00") +" "+ doorShouldBeOpened  +" "+ doorNowClosed;}
+		if (inTrigger) {contextText.text = "Press E to open the Doors";} 
 		
 		if(timer > 0.0f) {timer -= Time.deltaTime;} //countdown time by substracting current time
 		if(timer < 0.0f && !doorShouldBeOpened) //if timer is out and door is not opened
@@ -70,28 +63,10 @@ public class doorsMotion : MonoBehaviour
 			}
         }
 		  
-		// Note to self: test code for timer based hibernation
-        /*if((Input.GetKeyDown(KeyCode.G) && inTrigger ))
-        {
-			timer += 5.0f; //reset timer (approx every 5s)
-            animator.SetTrigger(openTrigger);
-			//FlowerDebugText.text = "G is being pressed "; //+ timer.ToString("#.00");
-			
-        }
-		//*
-		//FlowerDebugText.text = timer.ToString("#.00");
-		/*if(timer >= 0.0f) {timer -= Time.deltaTime;} //countdown time by substracting current time
-		if(timer <= 0.0f) 
-		{
-			animator.SetTrigger(closeTrigger);
-			//FlowerDebugText.text = "Flower Sleeps " + timer.ToString("#.00");
-		}
-		//*/
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("In here");
         if(other.tag == playerTag)
         {
             inTrigger = true;
@@ -100,7 +75,6 @@ public class doorsMotion : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //Debug.Log("Exiting here");
         if (other.tag == playerTag)
         {
 			inTrigger = false;

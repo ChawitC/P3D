@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
-
-
-
 namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
@@ -204,7 +201,6 @@ namespace StarterAssets
 				
 		}
 		
-
 		private void JumpAndGravity()
 		{
 			if (Grounded)
@@ -229,7 +225,6 @@ namespace StarterAssets
 					{
 					PlayJumpAudio();
 					jumped = true;
-					//Debug.Log("jumped set to true");
 					}
 				}
 				else if (jumped && _jumpTimeoutDelta < 0.0f) //else if jump is triggered once and the player is now on ground
@@ -238,9 +233,7 @@ namespace StarterAssets
 					//Debug.Log("jumped set to false");
 					jumped = false;
 				}
-
-				//Debug.Log(_jumpTimeoutDelta + " " + jumped);
-				
+		
 				// jump timeout
 				if (_jumpTimeoutDelta >= 0.0f)
 				{

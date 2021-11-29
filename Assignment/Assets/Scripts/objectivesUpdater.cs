@@ -13,17 +13,12 @@ public class objectivesUpdater : MonoBehaviour
 	private bool obj3 = false; //checking if player player has dropped a ball into the pot
 	private bool obj4 = false; //checking if player has touched the radio
 	
-    // Start is called before the first frame update
-    void Start()
-    {
-        // maybe ill need start later
-    }
-
     // Update is called once per frame
     void Update()
     {
+		// Write to the text field and keep appending
 		objectiveText.text = "- Objectives -\n";
-		
+	
         if (!obj1) {objectiveText.text = objectiveText.text + "[   ] Go through sliding doors\n";} 
 		else {objectiveText.text = objectiveText.text + "[✓] Go through sliding doors\n";}
 		
@@ -38,21 +33,25 @@ public class objectivesUpdater : MonoBehaviour
 		
     }
 	
+	//to be called from doorsMotion.cs
 	public bool Obj1done { 
 		get { return obj1; }
 		set { obj1 = value; }
 	}
 	
+	//to be called from spawnObjects.cs
 	public bool Obj2done { 
 		get { return obj2; }
 		set { obj2 = value; }
 	}
 	
+	//to be called from spawnObjects.cs
 	public bool Obj3done { 
 		get { return obj3; }
 		set { obj3 = value; }
 	}
 	
+	//to be called from selectableRadio.cs
 	public bool Obj4done { 
 		get { return obj4; }
 		set { obj4 = value; }
