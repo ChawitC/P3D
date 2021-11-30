@@ -6,13 +6,13 @@ using UnityEngine.VFX;
 
 public class ballsInPot : MonoBehaviour
 {
-	int objects = 0;
+	private int objects = 0;
 	[SerializeField] private string ballTag;
 	[SerializeField] private Text ballcountText;
 	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
 	[SerializeField] private Light potLight;
-	AudioSource audioSource;
-	VisualEffect visualEffect;
+	private AudioSource audioSource;
+	private VisualEffect visualEffect;
 	private float smokeRateCalc;
 	private float splinterRateCalc;
 	

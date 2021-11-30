@@ -12,7 +12,7 @@ public class selectableRadio : MonoBehaviour
 	[SerializeField] private AudioClip[] songTracks;  
 	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
 	
-	AudioSource audioSource;
+	private AudioSource audioSource;
 	private bool inTrigger;
 	private int lastPlayed;
 	

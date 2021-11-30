@@ -7,7 +7,6 @@ public class objectivesUpdater : MonoBehaviour
 {
 	[SerializeField] private Text objectiveText;
 
-
 	private bool obj1 = false; //checking if player has stepped on the "Narrative Zone"
 	private bool obj2 = false; //checking if player has gone through the door
 	private bool obj3 = false; //checking if player has spawned a ball

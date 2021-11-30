@@ -11,23 +11,15 @@ public class narrativeZone : MonoBehaviour
 	[Header("Audio")]
 	[SerializeField] private AudioSource audioSource;
 	[SerializeField] private int ZoneNumber;
-	
 	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
-	
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 	
 	private void OnTriggerEnter(Collider other)
     {
         if(other.tag == playerTag)
         {
-			if (ZoneNumber == 1) {contextText.text = "Welcome to the Sleeping Fox Inn! Please enter the building through the sliding doors.\nOur dining room will be on your left, and the bedroom on your right.";}
-			else if (ZoneNumber == 2) {contextText.text = "It's getting cold!\nPlease help add coal balls into the pot to keep the inn warm!";}
-			//else contextText.text = toString(ZoneNumber);
-			audioSource.Play(); //audioSource.clip
+			if (ZoneNumber == 1) {contextText.text = "Welcome to the Sleeping Fox Inn! Please enter the building through the sliding doors.\nOur dining room will be on your left and the bedroom on your right.";}
+			else if (ZoneNumber == 2) {contextText.text = "It's getting cold !\nPlease help add coal balls into the pot to keep the inn warm!";}
+			audioSource.Play();
 			objective.Obj1done = true; //Updating objective, since player has stepped in the zone
         }
     }
