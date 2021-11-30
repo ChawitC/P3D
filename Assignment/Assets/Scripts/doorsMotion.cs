@@ -45,7 +45,7 @@ public class doorsMotion : MonoBehaviour
 			if (!doorShouldBeOpened) {PlayOpenAudio(); doorNowClosed = false;} // Only open door once
 			doorShouldBeOpened = true; // if door is open you can't open again
 			
-			objective.Obj1done = true; //Updating objective, since player has already opened the door
+			objective.Obj2done = true; //Updating objective, since player has already opened the door
 			
         }
 		

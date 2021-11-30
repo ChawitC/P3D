@@ -39,7 +39,7 @@ public class ballsInPot : MonoBehaviour
 		{
 		PlayFireAudio();
 		objects++;
-		objective.Obj3done = true; //Updating objective, since player has dropped the ball into the pot
+		objective.Obj4done = true; //Updating objective, since player has dropped the ball into the pot
 		}
 	}
 

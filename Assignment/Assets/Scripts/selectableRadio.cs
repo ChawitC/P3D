@@ -9,7 +9,6 @@ public class selectableRadio : MonoBehaviour
 	[SerializeField] private string playerTag;
 	[SerializeField] private Text contextText;
 	[Header("Audio")]
-	[Tooltip("An array of footstep sounds. One gets randonly selected to play")]
 	[SerializeField] private AudioClip[] songTracks;  
 	[SerializeField] private objectivesUpdater objective; //Exposing objectiveUpdater script
 	
@@ -38,7 +37,7 @@ public class selectableRadio : MonoBehaviour
 			   PlaySongAudio(0);
 			   }
 			   else {contextText.text ="Track 1 was already selected\nYou can't play the same track consecutively!";}
-			   objective.Obj4done = true; //Updating objective, since player has already played the music
+			   objective.Obj5done = true; //Updating objective, since player has already played the music
 		   }
 		   else if(Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
 		   {
@@ -48,7 +47,7 @@ public class selectableRadio : MonoBehaviour
 			   PlaySongAudio(1);
 			   }
 			   else {contextText.text ="Track 2 was already selected\nYou can't play the same track consecutively!";}
-			   objective.Obj4done = true; //Updating objective, since player has already played the music
+			   objective.Obj5done = true; //Updating objective, since player has already played the music
 		   }
 		   else if(Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
 		   {
@@ -58,7 +57,7 @@ public class selectableRadio : MonoBehaviour
 			   PlaySongAudio(2);
 			   }
 			   else {contextText.text ="Track 3 was already selected\nYou can't play the same track consecutively!";}
-			   objective.Obj4done = true; //Updating objective, since player has already played the music
+			   objective.Obj5done = true; //Updating objective, since player has already played the music
 		   }
 		   else if(Input.GetKeyDown(KeyCode.Alpha0) || Input.GetKeyDown(KeyCode.Keypad0))
 		   {
