@@ -227,7 +227,8 @@ namespace StarterAssets
 					jumped = true;
 					}
 				}
-				else if (jumped && _jumpTimeoutDelta < 0.0f) //else if jump is triggered once and the player is now on ground
+				else if (jumped && _jumpTimeoutDelta < 0.0f) 
+					//else if jump is triggered once and the player is now on ground
 				{
 					PlayLandAudio();
 					//Debug.Log("jumped set to false");

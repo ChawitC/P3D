@@ -17,7 +17,9 @@ public class ballsSound : MonoBehaviour
 		{
 			audioSource.volume = 1.0f;
 		}
-        else // otherwise set sound volume at half the velocity (e.g. Velocity 1.6 will means sound volume at 0.8), the effect is working but not very significantly audible
+        else 
+			// otherwise set sound volume at half the velocity 
+		    //(e.g. Velocity 1.6 will means sound volume at 0.8), the effect is working but not very significantly audible
 		{
 			audioSource.volume = collision.relativeVelocity.magnitude / 2 ; 
 		}

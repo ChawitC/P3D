@@ -59,12 +59,12 @@ public class spawnObjects : MonoBehaviour
 			if (textStage == 1) {contextText.text = "Press F to grab the ball(s) close to you and hold them";}
 			if (Input.GetKeyDown(KeyCode.F))
 			{
-				if (textStage <= 1) {textStage=2;} //if F is pressed regardless of E had been pressed when entering the zone or not, progress to last stage
-				//This is to consider the case where balls has been left on the mantle
+				if (textStage <= 1) {textStage=2;} //if F is pressed regardless of E had been pressed when entering the zone or not, 
+				//progress to last stage. This is to consider the case where balls has been left on the mantle
 			}
 			if(textStage == 2) 
 			{
-				contextText.text = "Left click to throw the ball(s) forward\nRight click to drop the ball(s) straight down";
+				contextText.text = "Left-click to throw the ball(s) forward\nRight-click to drop the ball(s) straight down";
 			}
 		} 
     }
